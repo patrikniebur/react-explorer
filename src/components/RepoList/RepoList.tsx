@@ -8,6 +8,8 @@ import {
   Td,
   Link,
   Skeleton,
+  Spinner,
+  AbsoluteCenter,
 } from "@chakra-ui/react";
 
 import { Repository } from "../../types";
@@ -17,18 +19,26 @@ type Props = {
   loading?: Boolean;
 };
 export function RepoList({ loading, repositories }: Props) {
+  const loadingWithStaleData = loading && repositories.length > 0;
+  const loadingWithNoData = loading && repositories.length === 0;
+
   return (
-    <TableContainer w="full">
+    <TableContainer w="full" opacity={loadingWithStaleData ? 0.5 : 1}>
+      {loadingWithStaleData && (
+        <AbsoluteCenter>
+          <Spinner />
+        </AbsoluteCenter>
+      )}
       <Table variant="striped">
         <Thead>
           <Tr>
-            <Th>Repository</Th>
+            <Th w="100px">Repository</Th>
             <Th>Stars</Th>
             <Th>Forks</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {loading ? (
+          {loadingWithNoData ? (
             <LoadingSkeleton />
           ) : (
             <RepositoriesRows repositories={repositories} />
@@ -53,12 +63,12 @@ function RepositoriesRows({ repositories }: Pick<Props, "repositories">) {
       {repositories.map((repo) => (
         <Tr key={repo.id}>
           <Td>
-            <Link href={repo.url} target="_blank">
+            <Link href={repo.url} target="_blank" textDecor={"underline"}>
               {repo.name}
             </Link>
           </Td>
-          <Td>🌟 {repo.stargazerCount}</Td>
-          <Td>🍴 {repo.forkCount}</Td>
+          <Td w="15%">🌟 {repo.stargazerCount.toLocaleString()}</Td>
+          <Td w="15%">🍴 {repo.forkCount.toLocaleString()}</Td>
         </Tr>
       ))}
     </>

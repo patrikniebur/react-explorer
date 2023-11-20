@@ -6,11 +6,26 @@ export const repositorySearch = gql`
   query repositorySearch(
     $query: String!
     $type: SearchType!
-    $count: Int!
     $after: String
+    $before: String
+    $first: Int
+    $last: Int
   ) {
-    search(query: $query, type: $type, first: $count, after: $after) {
+    search(
+      query: $query
+      type: $type
+      after: $after
+      before: $before
+      first: $first
+      last: $last
+    ) {
       repositoryCount
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
       edges {
         cursor
         node {
@@ -34,7 +49,9 @@ export type RepositorySearchQuery = {
   variables: {
     query: string;
     type: "REPOSITORY" | "USER" | "ISSUE";
-    count: number;
+    first?: number;
+    last?: number;
     after?: string;
+    before?: string;
   };
 };
