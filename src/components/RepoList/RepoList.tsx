@@ -31,21 +31,37 @@ export function RepoList({ loading, repositories }: Props) {
           {loading ? (
             <LoadingSkeleton />
           ) : (
-            repositories.map((repo) => (
-              <Tr key={repo.id}>
-                <Td>
-                  <Link href={repo.url} target="_blank">
-                    {repo.name}
-                  </Link>
-                </Td>
-                <Td>🌟 {repo.stargazerCount}</Td>
-                <Td>🍴 {repo.forkCount}</Td>
-              </Tr>
-            ))
+            <RepositoriesRows repositories={repositories} />
           )}
         </Tbody>
       </Table>
     </TableContainer>
+  );
+}
+
+function RepositoriesRows({ repositories }: Pick<Props, "repositories">) {
+  if (repositories.length === 0) {
+    return (
+      <Tr>
+        <Td colSpan={3}>No repositories found</Td>
+      </Tr>
+    );
+  }
+
+  return (
+    <>
+      {repositories.map((repo) => (
+        <Tr key={repo.id}>
+          <Td>
+            <Link href={repo.url} target="_blank">
+              {repo.name}
+            </Link>
+          </Td>
+          <Td>🌟 {repo.stargazerCount}</Td>
+          <Td>🍴 {repo.forkCount}</Td>
+        </Tr>
+      ))}
+    </>
   );
 }
 

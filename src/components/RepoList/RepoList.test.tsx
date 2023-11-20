@@ -8,6 +8,7 @@ test("Renders RepoList with empty list", async () => {
 
   expect(screen.getByRole("table")).toBeDefined();
   expect(screen.queryByText("Loading")).not.toBeInTheDocument();
+  screen.getByText("No repositories found")
 });
 
 test("Renders loading state", async () => {
