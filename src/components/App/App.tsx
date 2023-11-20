@@ -9,7 +9,7 @@ import {
   Link,
 } from "@chakra-ui/react";
 
-function App() {
+export function App() {
   return (
     <TableContainer>
       <Table variant="striped">
@@ -41,4 +41,3 @@ function App() {
   );
 }
 
-export default App;
