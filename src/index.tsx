@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ChakraProvider } from "@chakra-ui/react";
+import { ApolloProvider } from "@apollo/client";
 
+import { client } from "./data/client";
 import { App } from "./components/App/App";
 
 const root = ReactDOM.createRoot(
@@ -9,8 +11,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ChakraProvider resetCSS>
-      <App />
-    </ChakraProvider>
+    <ApolloProvider client={client}>
+      <ChakraProvider resetCSS>
+        <App />
+      </ChakraProvider>
+    </ApolloProvider>
   </React.StrictMode>,
 );
