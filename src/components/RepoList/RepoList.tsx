@@ -18,7 +18,7 @@ type Props = {
 };
 export function RepoList({ loading, repositories }: Props) {
   return (
-    <TableContainer>
+    <TableContainer w="full">
       <Table variant="striped">
         <Thead>
           <Tr>
