@@ -1,43 +1,23 @@
-import {
-  Table,
-  TableContainer,
-  Thead,
-  Tr,
-  Th,
-  Tbody,
-  Td,
-  Link,
-} from "@chakra-ui/react";
+import { useQuery } from "@apollo/client";
+
+import { RepoList } from "../RepoList/RepoList";
+import { repositorySearch, RepositorySearchQuery } from "../../data/queries";
 
 export function App() {
-  return (
-    <TableContainer>
-      <Table variant="striped">
-        <Thead>
-          <Tr>
-            <Th>Repository</Th>
-            <Th>Stars</Th>
-            <Th>Forks</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          <Tr>
-            <Td>
-              <Link href="#">Example repo</Link>
-            </Td>
-            <Td>250 🌟</Td>
-            <Td>40 🍴</Td>
-          </Tr>
-          <Tr>
-            <Td>
-              <Link href="#">Example repo</Link>
-            </Td>
-            <Td>250 🌟</Td>
-            <Td>40 🍴</Td>
-          </Tr>
-        </Tbody>
-      </Table>
-    </TableContainer>
-  );
+  const { data, loading } = useQuery<
+    RepositorySearchQuery["data"],
+    RepositorySearchQuery["variables"]
+  >(repositorySearch, {
+    variables: initialQueryVariables,
+  });
+
+  const repositories = data?.search.edges.map((e) => e.node) ?? [];
+
+  return <RepoList loading={loading} repositories={repositories} />;
 }
 
+export const initialQueryVariables = {
+  type: "REPOSITORY" as const,
+  count: 5,
+  query: "React in:name,description sort:stars-desc",
+}

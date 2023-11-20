@@ -1,6 +1,19 @@
 import { render } from "@testing-library/react";
-import { App } from "./App";
+import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 
+import { repositorySearch } from "../../data/queries";
+import { App, initialQueryVariables } from "./App";
+
+const emptyMock: MockedResponse = {
+  request: {
+    query: repositorySearch,
+    variables: initialQueryVariables,
+  },
+};
 test("Renders app", () => {
-  render(<App />);
+  render(
+    <MockedProvider mocks={[emptyMock]}>
+      <App />
+    </MockedProvider>
+  );
 });
