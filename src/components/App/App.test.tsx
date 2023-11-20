@@ -7,7 +7,7 @@ import { App, initialQueryVariables } from "./App";
 const emptyMock: MockedResponse = {
   request: {
     query: repositorySearch,
-    variables: initialQueryVariables,
+    variables: { ...initialQueryVariables, first: 10 },
   },
 };
 test("Renders app", () => {
