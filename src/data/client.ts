@@ -6,7 +6,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
-import { ErrorCodes } from "../types/errorCodes";
+import { ErrorCodes } from "../types";
 
 const endpoint = process.env.REACT_APP_GRAPHQL_ENDPOINT;
 const token = process.env.REACT_APP_GRAPHQL_TOKEN;
