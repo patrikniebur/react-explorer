@@ -72,7 +72,7 @@ function useRepositoryData() {
   const pageInfo = d?.search.pageInfo;
 
   const totalPages = Math.floor(
-    d?.search.repositoryCount ?? LIST_COUNT / LIST_COUNT
+    d?.search.repositoryCount ?? LIST_COUNT / LIST_COUNT,
   );
 
   const nextPage = () => {

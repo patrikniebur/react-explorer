@@ -14,6 +14,6 @@ test("Renders app", () => {
   render(
     <MockedProvider mocks={[emptyMock]}>
       <App />
-    </MockedProvider>
+    </MockedProvider>,
   );
 });

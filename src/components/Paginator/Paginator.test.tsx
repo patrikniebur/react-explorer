@@ -30,7 +30,7 @@ test("When loading buttons are disabled and ignore clicks", async () => {
       loading
       nextPage={nextPage}
       prevPage={prevPage}
-    />
+    />,
   );
 
   userEvent.click(screen.getByLabelText("Next Page"));
@@ -52,7 +52,7 @@ test("When pages are available and not loading, event listeners are triggered on
       hasPreviousPage
       nextPage={nextPage}
       prevPage={prevPage}
-    />
+    />,
   );
 
   userEvent.click(screen.getByLabelText("Next Page"));

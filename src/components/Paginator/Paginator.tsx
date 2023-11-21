@@ -19,7 +19,6 @@ export function Paginator({
   hasNextPage,
   loading,
 }: Props) {
-
   return (
     <HStack w="full" justifyContent="space-between">
       <Button
@@ -31,7 +30,7 @@ export function Paginator({
       </Button>
       <Text>
         {/* total repositories was getting different response on every page */}
-        Page {currentPage} out of {totalPages > 100_000 ? 'many' : totalPages}
+        Page {currentPage} out of {totalPages > 100_000 ? "many" : totalPages}
       </Text>
       <Button
         onClick={nextPage}

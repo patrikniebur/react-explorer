@@ -1,3 +1,3 @@
 export enum ErrorCodes {
-    "MISSING_ENV"
+  "MISSING_ENV",
 }
